@@ -5,13 +5,20 @@ import random
 class WebsiteUser(HttpUser):
     wait_time = between(5, 15)  # Wait time between tasks
 
+    # List of login credentials
+    login_credentials = [
+        {"username": "user1", "password": "1234"},
+        {"username": "new_user", "password": "password123"},
+        # Add more credentials as needed
+    ]
+
     @task
     def view_product_list(self):
         self.client.get("/products")
 
     @task
     def view_product_details(self):
-        product_id = random.randint(1, 100)  # Assuming product IDs range from 1 to 100
+        product_id = random.randint(1, 5)  # Assuming product IDs range from 1 to 100
         self.client.get(f"/products/{product_id}")
 
     @task
@@ -21,12 +28,12 @@ class WebsiteUser(HttpUser):
 
     @task
     def delete_product(self):
-        product_id = random.randint(1, 100)  # Assuming product IDs range from 1 to 100
+        product_id = random.randint(6, 11)  # Assuming product IDs range from 1 to 100
         self.client.post(f"/products/{product_id}/delete")
 
     @task
     def edit_product(self):
-        product_id = random.randint(1, 100)  # Assuming product IDs range from 1 to 100
+        product_id = random.randint(6, 11)  # Assuming product IDs range from 1 to 100
         payload = {"name": "Edited Product", "quantity": 20, "price": "19.99"}
         self.client.post(f"/edit_product/{product_id}", data=payload)
 
@@ -37,7 +44,11 @@ class WebsiteUser(HttpUser):
 
     @task
     def login(self):
-        payload = {"username": "existing_user", "password": "password123"}
+        credentials = random.choice(self.login_credentials)
+        payload = {
+            "username": credentials["username"],
+            "password": credentials["password"],
+        }
         self.client.post("/login", data=payload)
 
     @task
