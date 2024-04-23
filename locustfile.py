@@ -1,6 +1,8 @@
 from locust import HttpUser, task, between
 import random
 
+# Synchronous version
+
 
 class WebsiteUser(HttpUser):
     wait_time = between(5, 15)  # Wait time between tasks
