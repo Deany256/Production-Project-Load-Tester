@@ -1,7 +1,7 @@
 from locust import HttpUser, task, between
 import random
 
-# Synchronous version
+# Asynchronous version
 
 
 class WebsiteUser(HttpUser):
