@@ -20,7 +20,7 @@ class WebsiteUser(HttpUser):
 
     @task
     def view_product_details(self):
-        product_id = random.randint(1, 5)  # Assuming product IDs range from 1 to 100
+        product_id = random.randint(1, 100)  # Assuming product IDs range from 1 to 100
         self.client.get(f"/products/{product_id}")
 
     @task
@@ -30,12 +30,12 @@ class WebsiteUser(HttpUser):
 
     @task
     def delete_product(self):
-        product_id = random.randint(6, 11)  # Assuming product IDs range from 1 to 100
+        product_id = random.randint(6, 100)  # Assuming product IDs range from 1 to 100
         self.client.post(f"/products/{product_id}/delete")
 
     @task
     def edit_product(self):
-        product_id = random.randint(6, 11)  # Assuming product IDs range from 1 to 100
+        product_id = random.randint(6, 100)  # Assuming product IDs range from 1 to 100
         payload = {"name": "Edited Product", "quantity": 20, "price": "19.99"}
         self.client.post(f"/edit_product/{product_id}", data=payload)
 
