@@ -46,7 +46,11 @@ class WebsiteUser(HttpUser):
 
     @task
     def login(self):
-        payload = {"username": "existing_user", "password": "password123"}
+        credentials = random.choice(self.login_credentials)
+        payload = {
+            "username": credentials["username"],
+            "password": credentials["password"],
+        }
         self.client.post("/login", data=payload)
 
     @task
