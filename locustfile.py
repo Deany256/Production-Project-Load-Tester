@@ -13,7 +13,7 @@ class WebsiteUser(HttpUser):
         {"username": "new_user", "password": "password123"},
     ]
 
-    @task
+    @task(5)
     def view_product_list(self):
         self.client.get("/products")
 
