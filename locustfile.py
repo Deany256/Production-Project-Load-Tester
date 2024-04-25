@@ -14,7 +14,7 @@ class WebsiteUser(HttpUser):
         # Add more credentials as needed
     ]
 
-    @task
+    @task(5)
     def view_product_list(self):
         self.client.get("/products")
 
